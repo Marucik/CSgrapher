@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Graph;
 
 namespace CSgrapher
 {
@@ -20,9 +21,33 @@ namespace CSgrapher
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow AppWindow;
+        private Graph.Graph graph;
         public MainWindow()
         {
             InitializeComponent();
+
+            AppWindow = this;
+            graph = new Graph.Graph(AppWindow);
+
+            int[] connections = { 1, 2, 3 };
+
+            graph.AddNode(connections);
+
+        }
+        public void Draw()
+        {
+            var xd = "xd";
+            AppWindow.AddText(xd);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            int[] connections = { 1, 2, 3 };
+
+            graph.AddNode(connections);
+
+            graph.DrawNodes();
         }
     }
 }

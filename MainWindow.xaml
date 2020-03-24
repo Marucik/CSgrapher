@@ -18,7 +18,7 @@
         <DockPanel Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New Random" />
+                    <MenuItem Header="_New Random" Click="MenuItem_Click" />
                     <MenuItem Header="_Open" />
                     <MenuItem Header="_Save" />
                 </MenuItem>
@@ -32,12 +32,11 @@
             <Label Content="Połączenia" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Height="28" Width="76"/>
             <DataGrid BorderBrush="{x:Null}"  Grid.Row="1">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Numer" Width="1*"/>
-                    <DataGridTextColumn Header="Waga"  Width="1*"/>
+                    <DataGridTextColumn Header="Nr wierzchołka" Width="1*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Canvas Grid.Column="1" Grid.Row="1">
+        <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1">
 
         </Canvas>
     </Grid>
