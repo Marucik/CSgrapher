@@ -35,11 +35,6 @@ namespace CSgrapher
             graph.AddNode(connections);
 
         }
-        public void Draw()
-        {
-            var xd = "xd";
-            AppWindow.AddText(xd);
-        }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
