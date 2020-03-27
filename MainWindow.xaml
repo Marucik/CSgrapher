@@ -18,9 +18,10 @@
         <DockPanel Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New Random" Click="MenuItem_Click" />
+                    <MenuItem Header="_New Random" />
                     <MenuItem Header="_Open" />
                     <MenuItem Header="_Save" />
+                    <MenuItem Header="_DogUp" Click="MenuItem_Click" />
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -36,7 +37,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1">
+        <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1" Background="White" MouseDown="MainCanvas_MouseDown" Margin="30,30,30,30">
 
         </Canvas>
     </Grid>

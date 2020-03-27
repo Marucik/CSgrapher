@@ -28,21 +28,18 @@ namespace CSgrapher
             InitializeComponent();
 
             AppWindow = this;
+
+        }
+
+        private void MainCanvas_MouseDown(object sender, RoutedEventArgs e)
+        {
             graph = new Graph.Graph(AppWindow);
-
-            int[] connections = { 1, 2, 3 };
-
-            graph.AddNode(connections);
-
+            graph.DrawGraph();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            int[] connections = { 1, 2, 3 };
-
-            graph.AddNode(connections);
-
-            graph.DrawNodes();
+            graph.ConvertToDogs();
         }
     }
 }
