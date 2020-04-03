@@ -7,15 +7,16 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using CSgrapher;
 using System.Windows.Media.Imaging;
+using System.Numerics;
 
 namespace Graph
 {
     class Graph
     {
-        private Random globalRandom = new Random();
-        private MainWindow mainWindow;
-        private List<Node> nodes = new List<Node>();
-        private List<Edge> edges = new List<Edge>();
+        private readonly Random globalRandom = new Random();
+        private readonly MainWindow mainWindow;
+        private readonly List<Node> nodes = new List<Node>();
+        private readonly List<Edge> edges = new List<Edge>();
 
         public Graph(MainWindow mainWindow)
         {
@@ -33,27 +34,6 @@ namespace Graph
             DescribeEdges();
             DrawEdges();
             DrawNodes();
-        }
-
-        public void ConvertToDogs()
-        {
-            foreach (Node node in nodes)
-            {
-                Image doggie = new Image();
-                BitmapImage bi3 = new BitmapImage();
-                bi3.BeginInit();
-                bi3.UriSource = new Uri("https://pngimage.net/wp-content/uploads/2018/05/dog-face-png-2.png");
-                bi3.EndInit();
-
-                doggie.Width = 40;
-                doggie.Height = 40;
-
-                doggie.Margin = new Thickness(node.X - 10, node.Y - 10, 0, 0);
-
-                doggie.Source = bi3;
-
-                mainWindow.MainCanvas.Children.Add(doggie);
-            }
         }
 
         private void AddNode(int[] connections)
@@ -74,7 +54,7 @@ namespace Graph
 
                     if(secondNode != null)
                     {
-                        edges.Add(new Edge(firstNode, secondNode));
+                        edges.Add(new Edge(firstNode.Position, secondNode.Position));
                     }
                 }
             }
@@ -95,22 +75,27 @@ namespace Graph
             drawedNode.Width = 20;
             drawedNode.Height = 20;
 
-            drawedNode.Margin = new Thickness(node.X, node.Y, 0, 0);
+            Vector2 position = node.Position;
+
+            drawedNode.Margin = new Thickness(position.X, position.Y, 0, 0);
 
             mainWindow.MainCanvas.Children.Add(drawedNode);
         }
 
         private void DrawSingleEdge(Edge edge)
         {
-            Line drawedEdge = new Line();
+            Line drawedEdge = new Line
+            {
+                StrokeThickness = 1,
+                Stroke = Brushes.Black
+            };
 
-            drawedEdge.StrokeThickness = 1;
-            drawedEdge.Stroke = Brushes.Black;
+            Vector2 position1 = edge.Position1, position2 = edge.Position2;
 
-            drawedEdge.X1 = edge.X1;
-            drawedEdge.X2 = edge.X2;
-            drawedEdge.Y1 = edge.Y1;
-            drawedEdge.Y2 = edge.Y2;
+            drawedEdge.X1 = position1.X;
+            drawedEdge.X2 = position2.X;
+            drawedEdge.Y1 = position1.Y;
+            drawedEdge.Y2 = position2.Y;
 
             mainWindow.MainCanvas.Children.Add(drawedEdge);
         }
@@ -130,16 +115,40 @@ namespace Graph
                 DrawSingleEdge(edge);
             }
         }
+
+        public void ConvertToDogs()
+        {
+            foreach (Node node in nodes)
+            {
+                Image doggie = new Image();
+                BitmapImage bi3 = new BitmapImage();
+                bi3.BeginInit();
+                bi3.UriSource = new Uri("https://pngimage.net/wp-content/uploads/2018/05/dog-face-png-2.png");
+                bi3.EndInit();
+
+                doggie.Width = 40;
+                doggie.Height = 40;
+
+                Vector2 position = node.Position;
+
+                doggie.Margin = new Thickness(position.X - 10, position.Y - 10, 0, 0);
+
+                doggie.Source = bi3;
+
+                mainWindow.MainCanvas.Children.Add(doggie);
+            }
+        }
     }
     
+
     class Node
     {
         private static int globalID = 0;
         private int id;
         private int[] connections;
-        private MainWindow mainWindow = MainWindow.AppWindow;
+        private readonly MainWindow mainWindow = MainWindow.AppWindow;
 
-        public int X, Y;
+        public Vector2 Position;
         public int[] Connections
         {
             get => connections;
@@ -158,8 +167,8 @@ namespace Graph
             double canvasWidth = mainWindow.MainCanvas.ActualWidth;
             double canvasHeight = mainWindow.MainCanvas.ActualHeight;
             
-            X = globalRandom.Next((int)canvasWidth - 20);
-            Y = globalRandom.Next((int)canvasHeight - 20);
+            Position.X = globalRandom.Next((int)canvasWidth - 20);
+            Position.Y = globalRandom.Next((int)canvasHeight - 20);
 
             this.connections = connections;
         }
@@ -172,14 +181,14 @@ namespace Graph
 
     class Edge
     {
-        public int X1, X2, Y1, Y2;
+        public Vector2 Position1, Position2;
 
-        public Edge(Node firstNode, Node secondNode)
+        public Edge(Vector2 firstNode, Vector2 secondNode)
         {
-            X1 = firstNode.X + 10;
-            X2 = secondNode.X + 10;
-            Y1 = firstNode.Y + 10;
-            Y2 = secondNode.Y + 10;
+            Position1.X = firstNode.X + 10;
+            Position2.X = secondNode.X + 10;
+            Position1.Y = firstNode.Y + 10;
+            Position2.Y = secondNode.Y + 10;
         }
     }
 }
