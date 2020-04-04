@@ -15,13 +15,19 @@ namespace Graph
     {
         private readonly Random globalRandom = new Random();
         private readonly MainWindow mainWindow;
-        private readonly List<Node> nodes = new List<Node>();
-        private readonly List<Edge> edges = new List<Edge>();
+        private List<Edge> Edges { get; } = new List<Edge>();
+        public List<Node> Nodes { get; } = new List<Node>();
+
+        public int NodesCount
+        {
+            get => Nodes.Count;
+        }
+
 
         public Graph(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 AddNode(new int[2] { globalRandom.Next(5), globalRandom.Next(5) });
             }
@@ -39,22 +45,22 @@ namespace Graph
         private void AddNode(int[] connections)
         {
             Node newNode = new Node(connections, globalRandom);
-            nodes.Add(newNode);
+            Nodes.Add(newNode);
         }
 
         private void DescribeEdges()
         {
-            foreach(Node currentNode in nodes)
+            foreach(Node currentNode in Nodes)
             {
                 Node firstNode = currentNode;
 
                 foreach(int nodeID in currentNode.Connections)
                 {
-                    Node secondNode = nodes.Find(x => x.ID.Equals(nodeID));
+                    Node secondNode = Nodes.Find(x => x.ID.Equals(nodeID));
 
                     if(secondNode != null)
                     {
-                        edges.Add(new Edge(firstNode.Position, secondNode.Position));
+                        Edges.Add(new Edge(firstNode, secondNode));
                     }
                 }
             }
@@ -90,19 +96,20 @@ namespace Graph
                 Stroke = Brushes.Black
             };
 
-            Vector2 position1 = edge.Position1, position2 = edge.Position2;
+            Vector2 position1 = edge.Nodes[0].Position;
+            Vector2 position2 = edge.Nodes[1].Position;
 
-            drawedEdge.X1 = position1.X;
-            drawedEdge.X2 = position2.X;
-            drawedEdge.Y1 = position1.Y;
-            drawedEdge.Y2 = position2.Y;
+            drawedEdge.X1 = position1.X + 10;
+            drawedEdge.X2 = position2.X + 10;
+            drawedEdge.Y1 = position1.Y + 10;
+            drawedEdge.Y2 = position2.Y + 10;
 
             mainWindow.MainCanvas.Children.Add(drawedEdge);
         }
 
         private void DrawNodes()
         {
-            foreach(Node node in nodes)
+            foreach(Node node in Nodes)
             {
                 DrawSingleNode(node);
             }
@@ -110,15 +117,16 @@ namespace Graph
 
         private void DrawEdges()
         {
-            foreach(Edge edge in edges)
+            foreach(Edge edge in Edges)
             {
                 DrawSingleEdge(edge);
             }
         }
 
+
         public void ConvertToDogs()
         {
-            foreach (Node node in nodes)
+            foreach (Node node in Nodes)
             {
                 Image doggie = new Image();
                 BitmapImage bi3 = new BitmapImage();
@@ -147,8 +155,9 @@ namespace Graph
         private int id;
         private int[] connections;
         private readonly MainWindow mainWindow = MainWindow.AppWindow;
-
         public Vector2 Position;
+        public Vector2 Displacement;
+
         public int[] Connections
         {
             get => connections;
@@ -167,8 +176,8 @@ namespace Graph
             double canvasWidth = mainWindow.MainCanvas.ActualWidth;
             double canvasHeight = mainWindow.MainCanvas.ActualHeight;
             
-            Position.X = globalRandom.Next((int)canvasWidth - 20);
-            Position.Y = globalRandom.Next((int)canvasHeight - 20);
+            Position.X = globalRandom.Next((int)canvasWidth);
+            Position.Y = globalRandom.Next((int)canvasHeight);
 
             this.connections = connections;
         }
@@ -181,14 +190,11 @@ namespace Graph
 
     class Edge
     {
-        public Vector2 Position1, Position2;
+        public List<Node> Nodes { get; }
 
-        public Edge(Vector2 firstNode, Vector2 secondNode)
+        public Edge(Node firstNode, Node secondNode)
         {
-            Position1.X = firstNode.X + 10;
-            Position2.X = secondNode.X + 10;
-            Position1.Y = firstNode.Y + 10;
-            Position2.Y = secondNode.Y + 10;
+            Nodes = new List<Node> { firstNode, secondNode };
         }
     }
 }
