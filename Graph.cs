@@ -15,7 +15,10 @@ namespace Graph
     {
         private readonly Random globalRandom = new Random();
         private readonly MainWindow mainWindow;
+        private List<List<int>> adjacencyMatrix = new List<List<int>>();
+
         private List<Edge> Edges { get; } = new List<Edge>();
+
         public List<Node> Nodes { get; } = new List<Node>();
 
         public int NodesCount
@@ -27,10 +30,8 @@ namespace Graph
         public Graph(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
-            for (int i = 0; i < 10; i++)
-            {
-                AddNode(new int[2] { globalRandom.Next(5), globalRandom.Next(5) });
-            }
+            GenerateNodes(10);
+            GenerateConnections();
         }
 
         public void DrawGraph()
@@ -42,25 +43,62 @@ namespace Graph
             DrawNodes();
         }
 
-        private void AddNode(int[] connections)
+        private void GenerateNodes(int count)
         {
-            Node newNode = new Node(connections, globalRandom);
-            Nodes.Add(newNode);
+            for (int i = 0; i < count; i++)
+            {
+                Node newNode = new Node(globalRandom);
+                Nodes.Add(newNode);
+            }
+        }
+
+        private void GenerateConnections()
+        {
+            foreach (Node currentNode in Nodes)
+            {
+                List<int> neightbours = new List<int>();
+
+                for (int i = 0; i <= currentNode.ID; i++)
+                {
+                    if (i == currentNode.ID)
+                    {
+                        neightbours.Add(0);
+                    }
+                    else
+                    {
+                        neightbours.Add((int)Math.Round(globalRandom.NextDouble()));
+                    }
+                }
+
+                adjacencyMatrix.Add(neightbours);
+
+                for (int i = 0; i < adjacencyMatrix.Count; i++)
+                {
+                    for (int j = 0; j < adjacencyMatrix[i].Count; j++)
+                    {
+                        if (adjacencyMatrix[i][j] == 1)
+                        {
+                            Node neighbour = Nodes.Find(x => x.ID.Equals(j));
+                            Nodes[i].Connections.Add(neighbour);
+                        }
+                    }
+                }
+            }
         }
 
         private void DescribeEdges()
         {
-            foreach(Node currentNode in Nodes)
+            for (int i = 0; i < adjacencyMatrix.Count; i++)
             {
-                Node firstNode = currentNode;
-
-                foreach(int nodeID in currentNode.Connections)
+                for (int j = 0; j < adjacencyMatrix[i].Count; j++)
                 {
-                    Node secondNode = Nodes.Find(x => x.ID.Equals(nodeID));
-
-                    if(secondNode != null)
+                    if (adjacencyMatrix[i][j] == 1)
                     {
-                        Edges.Add(new Edge(firstNode, secondNode));
+                        Node neighbour = Nodes.Find(x => x.ID.Equals(j));
+
+                        Edge newEdge = new Edge(Nodes[i], neighbour);
+
+                        Edges.Add(newEdge);
                     }
                 }
             }
@@ -109,7 +147,7 @@ namespace Graph
 
         private void DrawNodes()
         {
-            foreach(Node node in Nodes)
+            foreach (Node node in Nodes)
             {
                 DrawSingleNode(node);
             }
@@ -117,7 +155,7 @@ namespace Graph
 
         private void DrawEdges()
         {
-            foreach(Edge edge in Edges)
+            foreach (Edge edge in Edges)
             {
                 DrawSingleEdge(edge);
             }
@@ -147,39 +185,27 @@ namespace Graph
             }
         }
     }
-    
+
 
     class Node
     {
         private static int globalID = 0;
-        private int id;
-        private int[] connections;
         private readonly MainWindow mainWindow = MainWindow.AppWindow;
         public Vector2 Position;
         public Vector2 Displacement;
 
-        public int[] Connections
-        {
-            get => connections;
-            set => connections = value;
-        }
+        public List<Node> Connections { get; set; } = new List<Node>();
 
-        public int ID
-        {
-            get => id;
-            set => id = value;
-        }
+        public int ID { get; set; }
 
-        public Node(int[] connections, Random globalRandom)
+        public Node(Random globalRandom)
         {
-            id = globalID++;
+            ID = globalID++;
             double canvasWidth = mainWindow.MainCanvas.ActualWidth;
             double canvasHeight = mainWindow.MainCanvas.ActualHeight;
-            
+
             Position.X = globalRandom.Next((int)canvasWidth);
             Position.Y = globalRandom.Next((int)canvasHeight);
-
-            this.connections = connections;
         }
 
         public static void ClearID()
