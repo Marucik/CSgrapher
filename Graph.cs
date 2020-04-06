@@ -17,7 +17,7 @@ namespace Graph
         private readonly MainWindow mainWindow;
         private List<List<int>> adjacencyMatrix = new List<List<int>>();
 
-        private List<Edge> Edges { get; } = new List<Edge>();
+        public List<Edge> Edges { get; } = new List<Edge>();
 
         public List<Node> Nodes { get; } = new List<Node>();
 
@@ -30,7 +30,7 @@ namespace Graph
         public Graph(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
-            GenerateNodes(10);
+            GenerateNodes(6);
             GenerateConnections();
         }
 
@@ -39,6 +39,13 @@ namespace Graph
             mainWindow.MainCanvas.Children.Clear();
             Node.ClearID();
             DescribeEdges();
+            DrawEdges();
+            DrawNodes();
+        }
+
+        public void DrawTidyGraph()
+        {
+            mainWindow.MainCanvas.Children.Clear();
             DrawEdges();
             DrawNodes();
         }
