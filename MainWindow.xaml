@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSgrapher"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="820" Width="1271">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -36,11 +36,12 @@
                 <ListBox Name="ConnectionsBox" Grid.Row="1" BorderBrush="{x:Null}"/>
             </Grid>
         </Border>
-        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-            <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1" Background="White" MouseDown="MainCanvas_MouseDown"  Height="517" Width="632">
-               
+        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Background="WhiteSmoke">
+            <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1" Background="White"  Height="680" Width="1039">
+
             </Canvas>
         </ScrollViewer>
+        <ProgressBar HorizontalAlignment="Left" Height="10" VerticalAlignment="Center" Width="193" Grid.Column="1" Minimum="0" Maximum="30" Name="sequentialStatus"/>
 
 
     </Grid>

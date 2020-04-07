@@ -5,6 +5,8 @@ using System.Numerics;
 using System.Text;
 using System.Windows.Controls;
 using Graph;
+using System.Windows;
+using System.Threading;
 
 namespace ForceCalculator
 {
@@ -12,7 +14,7 @@ namespace ForceCalculator
     {
         private float factor;
         private float temperature;
-        private Canvas mainCanvas;
+        private readonly Canvas mainCanvas;
         public ForceCalculator(MainWindow mainWindow)
         {
             mainCanvas = mainWindow.MainCanvas;
@@ -25,7 +27,7 @@ namespace ForceCalculator
 
             factor = (float)Math.Sqrt(area / graph.NodesCount);
 
-            for (int n = 0; n < 100; n++)
+            for (int n = 0; n < 10; n++)
             {
                 foreach (Node currentNode in graph.Nodes)
                 {
@@ -69,8 +71,10 @@ namespace ForceCalculator
                     Vector2 displacment = Vector2.Multiply(ratio, distanceValue);
 
                     currentNode.Position = Vector2.Add(currentNode.Position, displacment);
-                }
+                    currentNode.Position.X = (float)Math.Min(mainCanvas.ActualWidth - 20, Math.Max(0, currentNode.Position.X));
+                    currentNode.Position.Y = (float)Math.Min(mainCanvas.ActualHeight - 20, Math.Max(0, currentNode.Position.Y));
 
+                }
             }
         }
 

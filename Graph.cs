@@ -15,7 +15,7 @@ namespace Graph
     {
         private readonly Random globalRandom = new Random();
         private readonly MainWindow mainWindow;
-        private List<List<int>> adjacencyMatrix = new List<List<int>>();
+        private readonly List<List<int>> adjacencyMatrix = new List<List<int>>();
 
         public List<Edge> Edges { get; } = new List<Edge>();
 
@@ -27,10 +27,10 @@ namespace Graph
         }
 
 
-        public Graph(MainWindow mainWindow)
+        public Graph(MainWindow mainWindow, int nodesCount)
         {
             this.mainWindow = mainWindow;
-            GenerateNodes(6);
+            GenerateNodes(nodesCount);
             GenerateConnections();
         }
 
@@ -211,8 +211,8 @@ namespace Graph
             double canvasWidth = mainWindow.MainCanvas.ActualWidth;
             double canvasHeight = mainWindow.MainCanvas.ActualHeight;
 
-            Position.X = globalRandom.Next((int)canvasWidth);
-            Position.Y = globalRandom.Next((int)canvasHeight);
+            Position.X = globalRandom.Next((int)canvasWidth-20);
+            Position.Y = globalRandom.Next((int)canvasHeight-20);
         }
 
         public static void ClearID()
