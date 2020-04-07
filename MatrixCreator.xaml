@@ -1,0 +1,32 @@
+﻿<Window x:Class="CSgrapher.MatrixCreator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSgrapher"
+        mc:Ignorable="d"
+        Title="MatrixCreator" Height="428" Width="452">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="64,54,64,53">
+            <Grid x:Name="MatrixGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="16" />
+                </Grid.RowDefinitions>
+                <WrapPanel x:Name="Row" Grid.Column="0" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Bottom">
+                </WrapPanel>
+                <WrapPanel x:Name="Column" Grid.Column="1" Grid.Row="1" >
+                </WrapPanel>
+                <WrapPanel x:Name="MainPanel" Grid.Column="1" Grid.Row="0" Orientation="Vertical">
+                </WrapPanel>
+                <Label Content="#" Width="16" Height="16" Grid.Column="0" Grid.Row="1" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            </Grid>
+            
+        </ScrollViewer>
+        <Button Content="Create" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="53" Padding="1,1,1,1" ScrollViewer.CanContentScroll="True"/>
+    </Grid>
+</Window>

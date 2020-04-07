@@ -62,7 +62,7 @@ namespace CSgrapher
             sequentialCounter = 0;
             timer = new System.Windows.Threading.DispatcherTimer();
             timer.Tick += new EventHandler(DispatcherTimer_Tick);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             timer.Start();
         }
 
@@ -74,7 +74,7 @@ namespace CSgrapher
             graph.DrawTidyGraph();
             sequentialStatus.Value = sequentialCounter;
             CommandManager.InvalidateRequerySuggested();
-            if(sequentialCounter >= 30)
+            if(sequentialCounter >= 120)
             {
                 timer.Stop();
             }
@@ -82,9 +82,36 @@ namespace CSgrapher
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            sequentialStatus.Value = sequentialCounter;
-            graph = new Graph.Graph(AppWindow, 20);
-            graph.DrawGraph();
+            NodeCount nodeCountPopUp = new NodeCount();
+            int nodeCount;
+
+            if (nodeCountPopUp.ShowDialog() == true)
+            {
+                sequentialStatus.Value = 0;
+                sequentialCounter = 0;
+                nodeCount = Int32.Parse(nodeCountPopUp.Answer);
+                graph = new Graph.Graph(AppWindow, nodeCount);
+                graph.DrawGraph();
+            }
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            NodeCount nodeCountPopUp = new NodeCount();
+            int nodeCount = 10;
+
+            if (nodeCountPopUp.ShowDialog() == true)
+            {
+                nodeCount = Int32.Parse(nodeCountPopUp.Answer);
+                MatrixCreator matrixCreator = new MatrixCreator(nodeCount);
+
+                if (matrixCreator.ShowDialog() == true)
+                {
+                    graph = new Graph.Graph(AppWindow, nodeCount);
+                    graph.DrawGraph();
+
+                }
+            }
         }
     }
 }
