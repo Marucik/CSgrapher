@@ -17,7 +17,9 @@ namespace CSgrapher
     /// </summary>
     public partial class MatrixCreator : Window
     {
-        private int nodeCount;
+        private readonly int nodeCount;
+        public List<List<int>> AdjecencyMatrix { get; } = new List<List<int>>();
+
         public MatrixCreator(int nodeCount)
         {
             InitializeComponent();
@@ -28,7 +30,8 @@ namespace CSgrapher
 
         private void ButtonDialogOk_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            CreateMatrix();
+            DialogResult = true;
         }
 
         private void CreateDescription()
@@ -63,10 +66,11 @@ namespace CSgrapher
 
                 for (int j = 1; j <= i; j++)
                 {
-                    CheckBox checkBox = new CheckBox();
-
-                    checkBox.Width = 16;
-                    checkBox.Height = 16;
+                    CheckBox checkBox = new CheckBox
+                    {
+                        Width = 16,
+                        Height = 16
+                    };
 
                     if (j == i)
                     {
@@ -77,6 +81,28 @@ namespace CSgrapher
                 }
 
                 MainPanel.Children.Add(singleRow);
+            }
+        }
+
+        private void CreateMatrix()
+        {
+            foreach (Panel row in MainPanel.Children)
+            {
+                List<int> matrixRow = new List<int>();
+
+                foreach (CheckBox checkbox in row.Children)
+                {
+                    if (checkbox.IsChecked == true)
+                    {
+                        matrixRow.Add(1);
+                    }
+                    else
+                    {
+                        matrixRow.Add(0);
+                    }
+                }
+
+                AdjecencyMatrix.Add(matrixRow);
             }
         }
     }

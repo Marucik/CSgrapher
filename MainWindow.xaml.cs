@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.IO;
 using System.Threading;
 using System.Timers;
 using System.Windows;
@@ -74,7 +76,7 @@ namespace CSgrapher
             graph.DrawTidyGraph();
             sequentialStatus.Value = sequentialCounter;
             CommandManager.InvalidateRequerySuggested();
-            if(sequentialCounter >= 120)
+            if (sequentialCounter >= 120)
             {
                 timer.Stop();
             }
@@ -98,20 +100,50 @@ namespace CSgrapher
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
-            int nodeCount = 10;
-
             if (nodeCountPopUp.ShowDialog() == true)
             {
-                nodeCount = Int32.Parse(nodeCountPopUp.Answer);
+                int nodeCount = Int32.Parse(nodeCountPopUp.Answer);
                 MatrixCreator matrixCreator = new MatrixCreator(nodeCount);
 
                 if (matrixCreator.ShowDialog() == true)
                 {
-                    graph = new Graph.Graph(AppWindow, nodeCount);
+                    graph = new Graph.Graph(AppWindow, matrixCreator.AdjecencyMatrix);
                     graph.DrawGraph();
-
                 }
             }
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Graph file (*.graph)|*.graph",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, graph.AdjecencyMatrixString);
+            }
+        }
+
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Graph file (*.graph)|*.graph",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+            string adjacencyMatrixString;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                adjacencyMatrixString = File.ReadAllText(openFileDialog.FileName);
+                graph = new Graph.Graph(AppWindow, adjacencyMatrixString);
+                graph.DrawGraph();
+            }
+
         }
     }
 }

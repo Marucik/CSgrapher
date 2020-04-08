@@ -20,7 +20,9 @@
                 <MenuItem Header="_File">
                     <MenuItem Header="_New" Click="MenuItem_Click_3" />
                     <MenuItem Header="_New Random" Click="MenuItem_Click_2" />
-                    <MenuItem Header="_Open" />
+                    <MenuItem Header="_Open" Click="MenuItem_Click_5" />
+                    <MenuItem Header="_Save" Click="MenuItem_Click_4" />
+                    <Separator />
                     <MenuItem Header="_Tide up" Click="MenuItem_Click_1" />
                     <MenuItem Header="_DogUp" Click="MenuItem_Click" />
                 </MenuItem>

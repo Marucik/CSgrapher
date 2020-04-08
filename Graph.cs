@@ -21,6 +21,11 @@ namespace Graph
 
         public List<Node> Nodes { get; } = new List<Node>();
 
+        public string AdjecencyMatrixString
+        {
+            get => GenerateGraphString();
+        }
+
         public int NodesCount
         {
             get => Nodes.Count;
@@ -32,6 +37,20 @@ namespace Graph
             this.mainWindow = mainWindow;
             GenerateNodes(nodesCount);
             GenerateConnections();
+        }
+
+        public Graph(MainWindow mainWindow, List<List<int>> adjacencyMatrix)
+        {
+            this.adjacencyMatrix = adjacencyMatrix;
+            this.mainWindow = mainWindow;
+            GenerateNodes(adjacencyMatrix.Count);
+        }
+
+        public Graph(MainWindow mainWindow, string adjacencyMatrixString)
+        {
+            this.adjacencyMatrix = ConvertToMatrix(adjacencyMatrixString);
+            this.mainWindow = mainWindow;
+            GenerateNodes(adjacencyMatrix.Count);
         }
 
         public void DrawGraph()
@@ -168,6 +187,46 @@ namespace Graph
             }
         }
 
+        private string GenerateGraphString()
+        {
+            string matrixString = "";
+
+            foreach (List<int> row in adjacencyMatrix)
+            {
+                foreach (int connection in row)
+                {
+                    matrixString += $"{connection} ";
+                }
+                matrixString += "\n";
+            }
+
+            return matrixString;
+        }
+
+        private List<List<int>> ConvertToMatrix(string adjacencyMatrixString)
+        {
+            List<List<int>> newAdjecencyMatrix = new List<List<int>>();
+
+            string[] rows = adjacencyMatrixString.Split(" \n");
+
+            foreach (string row in rows)
+            {
+                if (row != "")
+                {
+                    string[] connections = row.Length != 1 ? row.Split(" ") : row.Split("");
+                    List<int> connectionInts = new List<int>();
+
+                    foreach (string edge in connections)
+                    {
+                        connectionInts.Add(Int32.Parse(edge));
+                    }
+
+                    newAdjecencyMatrix.Add(connectionInts);
+                }
+            }
+
+            return newAdjecencyMatrix;
+        }
 
         public void ConvertToDogs()
         {
@@ -211,8 +270,8 @@ namespace Graph
             double canvasWidth = mainWindow.MainCanvas.ActualWidth;
             double canvasHeight = mainWindow.MainCanvas.ActualHeight;
 
-            Position.X = globalRandom.Next((int)canvasWidth-20);
-            Position.Y = globalRandom.Next((int)canvasHeight-20);
+            Position.X = globalRandom.Next((int)canvasWidth - 20);
+            Position.Y = globalRandom.Next((int)canvasHeight - 20);
         }
 
         public static void ClearID()

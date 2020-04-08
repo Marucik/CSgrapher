@@ -12,11 +12,12 @@ namespace CSgrapher
 		public NodeCount()
 		{
 			InitializeComponent();
+			TextAnswer.Text = "5";
 		}
 
 		private void ButtonDialogOk_Click(object sender, RoutedEventArgs e)
 		{
-			this.DialogResult = true;
+			DialogResult = true;
 		}
 
 		private void Window_ContentRendered(object sender, EventArgs e)
