@@ -29,13 +29,17 @@
             </Menu>
         </DockPanel>
         <ScrollViewer Grid.ColumnSpan="2" Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="ScrollViewer_Zoom_MouseWheel" Background="WhiteSmoke">
-            <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1" Background="White"  Height="731" Width="1190" MouseUp="MainCanvas_MouseUp">
+            <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1" Background="White"  Height="731" Width="1190" MouseUp="MainCanvas_MouseUp_HighlighNode">
 
             </Canvas>
         </ScrollViewer>
         <ProgressBar HorizontalAlignment="Left" Height="18" VerticalAlignment="Center" Width="193" Grid.Column="1" Minimum="0" Maximum="100" Name="sequentialProggresBar"/>
         <Label Content="Edges:" Grid.Column="1" Margin="198,0,0,0" Padding="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <Label Content="" Name="EdgesCount" Grid.Column="1" Margin="234,0,936,0" Padding="0,0,0,0" VerticalAlignment="Center" />
+        <WrapPanel Margin="10,0,0,21" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Width="140" Orientation="Horizontal">
+            <Label Content="Zoom:"  FontWeight="Bold" FontSize="18" Grid.ColumnSpan="2" Width="63" />
+            <Label Name="ZoomLabel" Content=""  FontWeight="Bold" FontSize="18" Grid.ColumnSpan="2" Width="77" />
 
+        </WrapPanel>
     </Grid>
 </Window>

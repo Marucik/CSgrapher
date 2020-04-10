@@ -26,6 +26,8 @@ namespace CSgrapher
             AppWindow = this;
 
             MainCanvas.LayoutTransform = new ScaleTransform(zoomValue, zoomValue);
+
+            ZoomLabel.Content = $"{(int)(zoomValue * 100)}%";
         }
 
         private void ScrollViewer_Zoom_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -36,6 +38,8 @@ namespace CSgrapher
             }
 
             MainCanvas.LayoutTransform = new ScaleTransform(zoomValue, zoomValue);
+
+            ZoomLabel.Content = $"{(int)(zoomValue * 100)}%";
 
             e.Handled = true;
         }
@@ -145,7 +149,7 @@ namespace CSgrapher
             e.Handled = true;
         }
 
-        private void MainCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        private void MainCanvas_MouseUp_HighlighNode(object sender, MouseButtonEventArgs e)
         {
             if (graph != null && graph.NodesCount > 0)
             {
