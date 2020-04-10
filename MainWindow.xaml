@@ -18,23 +18,24 @@
         <DockPanel Grid.ColumnSpan="2" Grid.Row="0">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" Click="MenuItem_Click_3" />
-                    <MenuItem Header="_New Random" Click="MenuItem_Click_2" />
-                    <MenuItem Header="_Open" Click="MenuItem_Click_5" />
-                    <MenuItem Header="_Save" Click="MenuItem_Click_4" />
+                    <MenuItem Header="_New" Click="Menu_New_Click" />
+                    <MenuItem Header="_New Random" Click="Menu_NewRandom_Click" />
+                    <MenuItem Header="_Open" Click="Menu_Open_Click" />
+                    <MenuItem Header="_Save" Click="Menu_Save_Click" />
                     <Separator />
-                    <MenuItem Header="_Tide up" Click="MenuItem_Click_1" />
-                    <MenuItem Header="_DogUp" Click="MenuItem_Click" />
+                    <MenuItem Header="_Tide up" Click="Menu_TideUp_Click" />
+                    <MenuItem Header="_DogUp" Click="Menu_DogUp_Click" />
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <ScrollViewer Grid.ColumnSpan="2" Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Background="WhiteSmoke">
-            <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1" Background="White"  Height="731" Width="1190">
+        <ScrollViewer Grid.ColumnSpan="2" Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="ScrollViewer_Zoom_MouseWheel" Background="WhiteSmoke">
+            <Canvas Name="MainCanvas" Grid.Column="1" Grid.Row="1" Background="White"  Height="731" Width="1190" MouseUp="MainCanvas_MouseUp">
 
             </Canvas>
         </ScrollViewer>
-        <ProgressBar HorizontalAlignment="Left" Height="18" VerticalAlignment="Center" Width="193" Grid.Column="1" Minimum="0" Maximum="100" Name="sequentialStatus"/>
-
+        <ProgressBar HorizontalAlignment="Left" Height="18" VerticalAlignment="Center" Width="193" Grid.Column="1" Minimum="0" Maximum="100" Name="sequentialProggresBar"/>
+        <Label Content="Edges:" Grid.Column="1" Margin="198,0,0,0" Padding="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Label Content="" Name="EdgesCount" Grid.Column="1" Margin="234,0,936,0" Padding="0,0,0,0" VerticalAlignment="Center" />
 
     </Grid>
 </Window>

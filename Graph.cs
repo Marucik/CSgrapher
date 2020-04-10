@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Media;
@@ -8,6 +7,7 @@ using System.Windows.Controls;
 using CSgrapher;
 using System.Windows.Media.Imaging;
 using System.Numerics;
+using Helpers;
 
 namespace Graph
 {
@@ -37,29 +37,34 @@ namespace Graph
             this.mainWindow = mainWindow;
             GenerateNodes(nodesCount);
             GenerateConnections();
+            DescribeEdges();
         }
 
         public Graph(MainWindow mainWindow, List<List<int>> adjacencyMatrix)
         {
-            this.adjacencyMatrix = adjacencyMatrix;
             this.mainWindow = mainWindow;
+            this.adjacencyMatrix = adjacencyMatrix;
             GenerateNodes(adjacencyMatrix.Count);
+            DescribeEdges();
         }
 
         public Graph(MainWindow mainWindow, string adjacencyMatrixString)
         {
-            this.adjacencyMatrix = ConvertToMatrix(adjacencyMatrixString);
             this.mainWindow = mainWindow;
+            adjacencyMatrix = ConvertToMatrix(adjacencyMatrixString);
             GenerateNodes(adjacencyMatrix.Count);
+            DescribeEdges();
         }
 
         public void DrawGraph()
         {
             mainWindow.MainCanvas.Children.Clear();
             Node.ClearID();
-            DescribeEdges();
             DrawEdges();
             DrawNodes();
+
+            mainWindow.sequentialProggresBar.Value = 0;
+            mainWindow.EdgesCount.Content = Edges.Count;
         }
 
         public void DrawTidyGraph()
@@ -67,6 +72,27 @@ namespace Graph
             mainWindow.MainCanvas.Children.Clear();
             DrawEdges();
             DrawNodes();
+        }
+
+        public void HighlightNodeAndEdges(Point mousePosition)
+        {
+            DrawGraph();
+
+            foreach (Node node in Nodes)
+            {
+                float nodeX = node.Position.X;
+                float nodeY = node.Position.Y;
+
+                if (mousePosition.X >= nodeX && mousePosition.X <= nodeX + 20)
+                {
+                    if (mousePosition.Y >= nodeY && mousePosition.Y <= nodeY + 20)
+                    {
+                        DrawHighlightedEdges(node);
+                        DrawHighlightedNode(node);
+                        break;
+                    }
+                }
+            }
         }
 
         private void GenerateNodes(int count)
@@ -132,41 +158,78 @@ namespace Graph
 
         private void DrawSingleNode(Node node)
         {
-            Ellipse drawedNode = new Ellipse();
-            SolidColorBrush mySolidColorBrush = new SolidColorBrush
-            {
-                Color = Color.FromArgb(255, 255, 150, 150)
-            };
-
-            drawedNode.Fill = mySolidColorBrush;
-            drawedNode.StrokeThickness = 1;
-            drawedNode.Stroke = Brushes.Black;
-
-            drawedNode.Width = 20;
-            drawedNode.Height = 20;
-
             Vector2 position = node.Position;
 
-            drawedNode.Margin = new Thickness(position.X, position.Y, 0, 0);
+            Ellipse drawedNode = new Ellipse
+            {
+                Fill = Brushes.GreenYellow,
+                StrokeThickness = 1,
+                Stroke = Brushes.Black,
+                Width = 20,
+                Height = 20,
+                Margin = new Thickness(position.X, position.Y, 0, 0)
+            };
+
+            Canvas.SetZIndex(drawedNode, 3);
+
+            mainWindow.MainCanvas.Children.Add(drawedNode);
+        }
+
+        private void DrawHighlightedNode(Node node)
+        {
+            Vector2 position = node.Position;
+
+            Ellipse drawedNode = new Ellipse
+            {
+                Fill = Brushes.Red,
+                StrokeThickness = 1,
+                Stroke = Brushes.Black,
+                Width = 20,
+                Height = 20,
+                Margin = new Thickness(position.X, position.Y, 0, 0)
+            };
+
+            Canvas.SetZIndex(drawedNode, 4);
 
             mainWindow.MainCanvas.Children.Add(drawedNode);
         }
 
         private void DrawSingleEdge(Edge edge)
         {
-            Line drawedEdge = new Line
-            {
-                StrokeThickness = 1,
-                Stroke = Brushes.Black
-            };
-
             Vector2 position1 = edge.Nodes[0].Position;
             Vector2 position2 = edge.Nodes[1].Position;
 
-            drawedEdge.X1 = position1.X + 10;
-            drawedEdge.X2 = position2.X + 10;
-            drawedEdge.Y1 = position1.Y + 10;
-            drawedEdge.Y2 = position2.Y + 10;
+            Line drawedEdge = new Line
+            {
+                StrokeThickness = 1,
+                Stroke = Brushes.Black,
+                X1 = position1.X + 10,
+                X2 = position2.X + 10,
+                Y1 = position1.Y + 10,
+                Y2 = position2.Y + 10
+            };
+
+            Canvas.SetZIndex(drawedEdge, 1);
+
+            mainWindow.MainCanvas.Children.Add(drawedEdge);
+        }
+
+        private void DrawHighlightedEdge(Edge edge)
+        {
+            Vector2 position1 = edge.Nodes[0].Position;
+            Vector2 position2 = edge.Nodes[1].Position;
+
+            Line drawedEdge = new Line
+            {
+                StrokeThickness = 2,
+                Stroke = Brushes.Black,
+                X1 = position1.X + 10,
+                X2 = position2.X + 10,
+                Y1 = position1.Y + 10,
+                Y2 = position2.Y + 10
+            };
+
+            Canvas.SetZIndex(drawedEdge, 2);
 
             mainWindow.MainCanvas.Children.Add(drawedEdge);
         }
@@ -184,6 +247,17 @@ namespace Graph
             foreach (Edge edge in Edges)
             {
                 DrawSingleEdge(edge);
+            }
+        }
+
+        private void DrawHighlightedEdges(Node node)
+        {
+            foreach (Edge edge in Edges)
+            {
+                if (edge.Nodes[0].ID == node.ID || edge.Nodes[1].ID == node.ID)
+                {
+                    DrawHighlightedEdge(edge);
+                }
             }
         }
 
@@ -230,28 +304,26 @@ namespace Graph
 
         public void ConvertToDogs()
         {
+            BitmapImage bi3 = new BitmapImage();
+            bi3.BeginInit();
+            bi3.UriSource = new Uri("https://pngimage.net/wp-content/uploads/2018/05/dog-face-png-2.png");
+            bi3.EndInit();
+
             foreach (Node node in Nodes)
             {
-                Image doggie = new Image();
-                BitmapImage bi3 = new BitmapImage();
-                bi3.BeginInit();
-                bi3.UriSource = new Uri("https://pngimage.net/wp-content/uploads/2018/05/dog-face-png-2.png");
-                bi3.EndInit();
-
-                doggie.Width = 40;
-                doggie.Height = 40;
-
                 Vector2 position = node.Position;
-
-                doggie.Margin = new Thickness(position.X - 10, position.Y - 10, 0, 0);
-
-                doggie.Source = bi3;
+                Image doggie = new Image
+                {
+                    Width = 40,
+                    Height = 40,
+                    Margin = new Thickness(position.X - 10, position.Y - 10, 0, 0),
+                    Source = bi3
+                };
 
                 mainWindow.MainCanvas.Children.Add(doggie);
             }
         }
     }
-
 
     class Node
     {
@@ -267,11 +339,11 @@ namespace Graph
         public Node(Random globalRandom)
         {
             ID = globalID++;
-            double canvasWidth = mainWindow.MainCanvas.ActualWidth;
-            double canvasHeight = mainWindow.MainCanvas.ActualHeight;
+            double shrinkedCanvasWidth = mainWindow.MainCanvas.ActualWidth - 20;
+            double shrinkedCanvasHeight = mainWindow.MainCanvas.ActualHeight - 20;
 
-            Position.X = globalRandom.Next((int)canvasWidth - 20);
-            Position.Y = globalRandom.Next((int)canvasHeight - 20);
+            Position.X = globalRandom.NextFloatRange(0, (float)shrinkedCanvasWidth);
+            Position.Y = globalRandom.NextFloatRange(0, (float)shrinkedCanvasHeight);
         }
 
         public static void ClearID()

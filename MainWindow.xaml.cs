@@ -1,11 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
-using System.Threading;
-using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace CSgrapher
 {
@@ -26,55 +25,43 @@ namespace CSgrapher
 
             AppWindow = this;
 
-            ScaleTransform scale = new ScaleTransform(zoomValue, zoomValue);
-            MainCanvas.LayoutTransform = scale;
+            MainCanvas.LayoutTransform = new ScaleTransform(zoomValue, zoomValue);
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            graph.ConvertToDogs();
-        }
-
-        private void MainCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
-        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void ScrollViewer_Zoom_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                if (e.Delta > 0)
-                {
-                    zoomValue += 0.1;
-                }
-                else
-                {
-                    zoomValue -= 0.1;
-                }
+                _ = e.Delta > 0 ? zoomValue += 0.1 : zoomValue -= 0.1;
             }
 
-            ScaleTransform scale = new ScaleTransform(zoomValue, zoomValue);
-            MainCanvas.LayoutTransform = scale;
+            MainCanvas.LayoutTransform = new ScaleTransform(zoomValue, zoomValue);
+
             e.Handled = true;
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void Menu_TideUp_Click(object sender, RoutedEventArgs e)
         {
             sequentialCounter = 0;
             timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Tick += new EventHandler(DispatcherTimer_Tick);
+            timer.Tick += new EventHandler(Sequentia_TideUp_Tick);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             timer.Start();
+
+            e.Handled = true;
         }
 
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        private void Sequentia_TideUp_Tick(object sender, EventArgs e)
         {
             sequentialCounter++;
+
             ForceCalculator.ForceCalculator forceCalculator = new ForceCalculator.ForceCalculator(AppWindow);
             forceCalculator.CalculateForces(graph);
+
             graph.DrawTidyGraph();
-            sequentialStatus.Value = sequentialCounter;
+
+            sequentialProggresBar.Value = sequentialCounter;
+
             CommandManager.InvalidateRequerySuggested();
             if (sequentialCounter >= 120)
             {
@@ -82,24 +69,26 @@ namespace CSgrapher
             }
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        private void Menu_NewRandom_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
             int nodeCount;
 
             if (nodeCountPopUp.ShowDialog() == true)
             {
-                sequentialStatus.Value = 0;
                 sequentialCounter = 0;
                 nodeCount = Int32.Parse(nodeCountPopUp.Answer);
                 graph = new Graph.Graph(AppWindow, nodeCount);
                 graph.DrawGraph();
             }
+
+            e.Handled = true;
         }
 
-        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        private void Menu_New_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
+
             if (nodeCountPopUp.ShowDialog() == true)
             {
                 int nodeCount = Int32.Parse(nodeCountPopUp.Answer);
@@ -111,9 +100,11 @@ namespace CSgrapher
                     graph.DrawGraph();
                 }
             }
+
+            e.Handled = true;
         }
 
-        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        private void Menu_Save_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -125,9 +116,11 @@ namespace CSgrapher
             {
                 File.WriteAllText(saveFileDialog.FileName, graph.AdjecencyMatrixString);
             }
+
+            e.Handled = true;
         }
 
-        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        private void Menu_Open_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -135,14 +128,32 @@ namespace CSgrapher
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
 
-            string adjacencyMatrixString;
-
             if (openFileDialog.ShowDialog() == true)
             {
-                adjacencyMatrixString = File.ReadAllText(openFileDialog.FileName);
+                string adjacencyMatrixString = File.ReadAllText(openFileDialog.FileName);
                 graph = new Graph.Graph(AppWindow, adjacencyMatrixString);
                 graph.DrawGraph();
             }
+
+            e.Handled = true;
+        }
+
+        private void Menu_DogUp_Click(object sender, RoutedEventArgs e)
+        {
+            graph.ConvertToDogs();
+
+            e.Handled = true;
+        }
+
+        private void MainCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (graph != null && graph.NodesCount > 0)
+            {
+                Point mousePosition = e.GetPosition(MainCanvas);
+                graph.HighlightNodeAndEdges(mousePosition);
+            }
+
+            e.Handled = true;
 
         }
     }

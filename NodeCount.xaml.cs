@@ -12,7 +12,7 @@ namespace CSgrapher
 		public NodeCount()
 		{
 			InitializeComponent();
-			TextAnswer.Text = "5";
+			TextAnswer.Text = "10";
 		}
 
 		private void ButtonDialogOk_Click(object sender, RoutedEventArgs e)
