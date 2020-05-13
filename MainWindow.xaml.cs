@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace CSgrapher
 {
@@ -13,56 +12,83 @@ namespace CSgrapher
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow AppWindow;
         private Graph.Graph graph;
         private double zoomValue = 1;
         private static System.Windows.Threading.DispatcherTimer timer;
         private int sequentialCounter = 0;
+        private static MainWindow appWindow;
 
+
+        /// <summary>
+        /// MainWindow.xaml constructor. 
+        /// Initializing MainWindow component, setting up global MainWindow variable
+        /// and setting up initial zoom value for ZoomLabel.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
 
-            AppWindow = this;
-
-            MainCanvas.LayoutTransform = new ScaleTransform(zoomValue, zoomValue);
+            appWindow = this;
 
             ZoomLabel.Content = $"{(int)(zoomValue * 100)}%";
         }
 
+        /// <summary>
+        /// Method for handling zooming canvas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScrollViewer_Zoom_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                _ = e.Delta > 0 ? zoomValue += 0.1 : zoomValue -= 0.1;
+                if (e.Delta > 0)
+                {
+                    zoomValue = zoomValue < 2 ? zoomValue += 0.1 : zoomValue;
+                }
+                else
+                {
+                    zoomValue = zoomValue > 0.2 ? zoomValue -= 0.1 : zoomValue;
+                }
+
+                MainCanvas.LayoutTransform = new ScaleTransform(zoomValue, zoomValue);
+
+                ZoomLabel.Content = $"{(int)(zoomValue * 100)}%";
             }
-
-            MainCanvas.LayoutTransform = new ScaleTransform(zoomValue, zoomValue);
-
-            ZoomLabel.Content = $"{(int)(zoomValue * 100)}%";
 
             e.Handled = true;
         }
 
-        private void Menu_TideUp_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Method for handling execution of dispatched arrangement alghoritm.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Menu_Arrange_Click(object sender, RoutedEventArgs e)
         {
             sequentialCounter = 0;
             timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Tick += new EventHandler(Sequentia_TideUp_Tick);
+            timer.Tick += new EventHandler(Sequentia_Arrange_Tick);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             timer.Start();
 
             e.Handled = true;
         }
 
-        private void Sequentia_TideUp_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// Method for dispatcher <see cref="EventHandler"/> which executes
+        /// force calculator for given <see cref="graph"/>.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Sequentia_Arrange_Tick(object sender, EventArgs e)
         {
             sequentialCounter++;
 
-            ForceCalculator.ForceCalculator forceCalculator = new ForceCalculator.ForceCalculator(AppWindow);
+            ForceCalculator.ForceCalculator forceCalculator = new ForceCalculator.ForceCalculator(appWindow);
             forceCalculator.CalculateForces(graph);
 
-            graph.DrawTidyGraph();
+            graph.DrawGraph();
 
             sequentialProggresBar.Value = sequentialCounter;
 
@@ -73,6 +99,12 @@ namespace CSgrapher
             }
         }
 
+        /// <summary>
+        /// Method for creating new random <see cref="graph"/> instance with
+        /// given number of nodes in <see cref="NodeCount"/> window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_NewRandom_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
@@ -82,13 +114,21 @@ namespace CSgrapher
             {
                 sequentialCounter = 0;
                 nodeCount = Int32.Parse(nodeCountPopUp.Answer);
-                graph = new Graph.Graph(AppWindow, nodeCount);
+                graph = new Graph.Graph(appWindow, nodeCount);
                 graph.DrawGraph();
+                EnableMenu();
             }
 
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Method for creating new <see cref="graph"/> instance with
+        /// given number of <see cref="Graph.Node"/> in <see cref="NodeCount"/> window
+        /// and user-added <see cref="Graph.Edge"/>s.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_New_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
@@ -100,14 +140,20 @@ namespace CSgrapher
 
                 if (matrixCreator.ShowDialog() == true)
                 {
-                    graph = new Graph.Graph(AppWindow, matrixCreator.AdjecencyMatrix);
+                    graph = new Graph.Graph(appWindow, matrixCreator.AdjecencyMatrix);
                     graph.DrawGraph();
+                    EnableMenu();
                 }
             }
 
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Method handling graph to file saving.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Save_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -124,6 +170,11 @@ namespace CSgrapher
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Method handling opening graph from file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Open_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -135,13 +186,18 @@ namespace CSgrapher
             if (openFileDialog.ShowDialog() == true)
             {
                 string adjacencyMatrixString = File.ReadAllText(openFileDialog.FileName);
-                graph = new Graph.Graph(AppWindow, adjacencyMatrixString);
+                graph = new Graph.Graph(appWindow, adjacencyMatrixString);
                 graph.DrawGraph();
             }
 
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Method which converts <see cref="Graph.Node"/>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_DogUp_Click(object sender, RoutedEventArgs e)
         {
             graph.ConvertToDogs();
@@ -149,6 +205,12 @@ namespace CSgrapher
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Method handling highlighting <see cref="Graph.Node"/> and corresponding
+        /// <see cref="Graph.Edge"/> on <see cref="MainCanvas"/>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainCanvas_MouseUp_HighlighNode(object sender, MouseButtonEventArgs e)
         {
             if (graph != null && graph.NodesCount > 0)
@@ -159,6 +221,16 @@ namespace CSgrapher
 
             e.Handled = true;
 
+        }
+
+        /// <summary>
+        /// Method which enables menu items when new graph is drawed on <see cref="MainCanvas"/>
+        /// </summary>
+        private void EnableMenu()
+        {
+            MenuDogUp.IsEnabled = true;
+            MenuSave.IsEnabled = true;
+            MenuTideUp.IsEnabled = true;
         }
     }
 }

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Helpers.Helpers">
+    <Position X="3.75" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graph.Graph">
+    <Position X="9.75" Y="2.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AoIwgAACAIAAAhACAAJAAAAABAASQQAABAACAUAAgAA=</HashCode>
+      <FileName>Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graph.Node">
+    <Position X="13" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAAAAgAAgAAAAAAAABAAgAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graph.Edge">
+    <Position X="13" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ForceCalculator.ForceCalculator">
+    <Position X="3.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEBAAQAAAAAAAAAAAAAAAAAEAAAAAAAAACAA=</HashCode>
+      <FileName>ForceCalculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSgrapher.MainWindow">
+    <Position X="6" Y="2.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAIAAQAAEAAAAAAIAgDCAAAAAQAAADgEAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CSgrapher.MatrixCreator">
+    <Position X="0.5" Y="5.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgBAAACAgAAgA=</HashCode>
+      <FileName>MatrixCreator.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CSgrapher.NodeCount">
+    <Position X="0.5" Y="2.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAEAAAAAAAAgAAAAAgAAAAA=</HashCode>
+      <FileName>NodeCount.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

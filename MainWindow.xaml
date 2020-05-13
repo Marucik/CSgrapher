@@ -21,10 +21,10 @@
                     <MenuItem Header="_New" Click="Menu_New_Click" />
                     <MenuItem Header="_New Random" Click="Menu_NewRandom_Click" />
                     <MenuItem Header="_Open" Click="Menu_Open_Click" />
-                    <MenuItem Header="_Save" Click="Menu_Save_Click" />
+                    <MenuItem Header="_Save" Name="MenuSave" Click="Menu_Save_Click" IsEnabled="False"/>
                     <Separator />
-                    <MenuItem Header="_Tide up" Click="Menu_TideUp_Click" />
-                    <MenuItem Header="_DogUp" Click="Menu_DogUp_Click" />
+                    <MenuItem Header="_Arrange" Name="MenuTideUp" Click="Menu_Arrange_Click" IsEnabled="False"/>
+                    <MenuItem Header="_DogUp" Name="MenuDogUp" Click="Menu_DogUp_Click" IsEnabled="False"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -33,9 +33,12 @@
 
             </Canvas>
         </ScrollViewer>
-        <ProgressBar HorizontalAlignment="Left" Height="18" VerticalAlignment="Center" Width="193" Grid.Column="1" Minimum="0" Maximum="100" Name="sequentialProggresBar"/>
-        <Label Content="Edges:" Grid.Column="1" Margin="198,0,0,0" Padding="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Label Content="" Name="EdgesCount" Grid.Column="1" Margin="234,0,936,0" Padding="0,0,0,0" VerticalAlignment="Center" />
+        <WrapPanel HorizontalAlignment="Left" Height="18" VerticalAlignment="Center" Grid.Column="1">
+            <ProgressBar HorizontalAlignment="Left" Height="18" VerticalAlignment="Center" Width="193"  Minimum="0" Maximum="100" Name="sequentialProggresBar"/>
+            <Label Content="Edges:" Grid.Column="1" Padding="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0" />
+            <Label Content="" Name="EdgesCount" Padding="0,0,0,0" VerticalAlignment="Center" Width="35"/>
+            <Label Content="Click on node to highligh corresponding edges." Padding="0,0,0,0" VerticalAlignment="Center" Margin="15,0,0,0" FontWeight="Bold" FontStyle="Italic"/>
+        </WrapPanel>
         <WrapPanel Margin="10,0,0,21" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Width="140" Orientation="Horizontal">
             <Label Content="Zoom:"  FontWeight="Bold" FontSize="18" Grid.ColumnSpan="2" Width="63" />
             <Label Name="ZoomLabel" Content=""  FontWeight="Bold" FontSize="18" Grid.ColumnSpan="2" Width="77" />
