@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,3 +18,8 @@ jobs:
       with:
         working-directory: 'docs/'
         doxyfile-path: './Doxyfile'
+        
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
