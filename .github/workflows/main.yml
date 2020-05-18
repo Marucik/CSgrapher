@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    - run: ls
     - uses: mattnotmitt/doxygen-action@v1
       with:
         working-directory: 'docs/'
