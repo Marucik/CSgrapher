@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSgrapher"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="MatrixCreator" Height="428" Width="426">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="46,27,46,46">

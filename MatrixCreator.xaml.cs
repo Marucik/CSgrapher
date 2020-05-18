@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CSgrapher
 {
@@ -18,8 +11,15 @@ namespace CSgrapher
     public partial class MatrixCreator : Window
     {
         private readonly int nodeCount;
+        /// <summary>
+        /// Property which stores node connections in form of 2-dimensional <see cref="List"/> of <see cref="int"/>.
+        /// </summary>
         public List<List<int>> AdjecencyMatrix { get; } = new List<List<int>>();
 
+        /// <summary>
+        /// Concstructor which initialize window and set <see cref="nodeCount"/> to value from param.
+        /// </summary>
+        /// <param name="nodeCount"></param>
         public MatrixCreator(int nodeCount)
         {
             InitializeComponent();
@@ -28,15 +28,24 @@ namespace CSgrapher
             CreateDescription();
         }
 
+        /// <summary>
+        /// Method for handling click on "OK" button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDialogOk_Click(object sender, RoutedEventArgs e)
         {
             CreateMatrix();
             DialogResult = true;
         }
 
+        /// <summary>
+        /// Method which creates and display pseudo matrix with checkboxes,
+        /// based on <see cref="nodeCount"/> in <see cref="MatrixCreator"/> window.
+        /// </summary>
         private void CreateDescription()
         {
-            for (int i = 1; i <= nodeCount; i++)
+            for (int i = 0; i < nodeCount; i++)
             {
                 Label rowId = new Label
                 {
@@ -64,7 +73,7 @@ namespace CSgrapher
 
                 WrapPanel singleRow = new WrapPanel();
 
-                for (int j = 1; j <= i; j++)
+                for (int j = 0; j <= i; j++)
                 {
                     CheckBox checkBox = new CheckBox
                     {
@@ -84,6 +93,9 @@ namespace CSgrapher
             }
         }
 
+        /// <summary>
+        /// Method which parse data from checboxes to pseudo matrix in <see cref="AdjecencyMatrix"/>.
+        /// </summary>
         private void CreateMatrix()
         {
             foreach (Panel row in MainPanel.Children)
