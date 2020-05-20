@@ -92,7 +92,6 @@ namespace CSgrapher
 
             sequentialProggresBar.Value = sequentialCounter;
 
-            CommandManager.InvalidateRequerySuggested();
             if (sequentialCounter >= 120)
             {
                 timer.Stop();
