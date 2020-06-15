@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Controls;
-using CSgrapher;
 using System.Windows.Media.Imaging;
 using System.Numerics;
 using Helpers;
@@ -18,7 +17,7 @@ namespace Graph
     class Graph
     {
         private readonly System.Random globalRandom = new System.Random();
-        private readonly MainWindow mainWindow;
+        private readonly Canvas mainCanvas;
         private readonly List<List<int>> adjacencyMatrix = new List<List<int>>();
 
         /// <summary>
@@ -58,11 +57,11 @@ namespace Graph
         /// <summary>
         /// Basic constructor which generates random graph based on <paramref name="nodesCount"/> param.
         /// </summary>
-        /// <param name="mainWindow"></param>
-        /// <param name="nodesCount"></param>
-        public Graph(MainWindow mainWindow, int nodesCount)
+        /// <param name="mainCanvas">Canvas on which graph will be drawn.</param>
+        /// <param name="nodesCount">Number of nodes to draw.</param>
+        public Graph(Canvas mainCanvas, int nodesCount)
         {
-            this.mainWindow = mainWindow;
+            this.mainCanvas = mainCanvas;
 
             Node.ClearID();
             GenerateNodes(nodesCount);
@@ -73,12 +72,12 @@ namespace Graph
         /// <summary>
         /// Constructor which generates graph with connectins based on <paramref name="adjacencyMatrix"/> pseudo matrix param.
         /// </summary>
-        /// <param name="mainWindow"></param>
-        /// <param name="adjacencyMatrix"></param>
-        public Graph(MainWindow mainWindow, List<List<int>> adjacencyMatrix)
+        /// <param name="mainCanvas">Canvas on which graph will be drawn.</param>
+        /// <param name="adjacencyMatrix">Matrix which represents connections between <see cref="Node"/>s.</param>
+        public Graph(Canvas mainCanvas, List<List<int>> adjacencyMatrix)
         {
-            this.mainWindow = mainWindow;
-
+            this.mainCanvas = mainCanvas;
+            
             Node.ClearID();
             this.adjacencyMatrix = adjacencyMatrix;
             GenerateNodes(adjacencyMatrix.Count);
@@ -89,11 +88,11 @@ namespace Graph
         /// Constructor which generates graph with connectins based on <paramref name="adjacencyMatrixString"/> string param.
         /// Used to recreate graph form file.
         /// </summary>
-        /// <param name="mainWindow"></param>
-        /// <param name="adjacencyMatrixString"></param>
-        public Graph(MainWindow mainWindow, string adjacencyMatrixString)
+        /// <param name="mainCanvas">Canvas on which graph will be drawn.</param>
+        /// <param name="adjacencyMatrixString">Matrix which represents connections between <see cref="Node"/>s in <see cref="string"/> format.</param>
+        public Graph(Canvas mainCanvas, string adjacencyMatrixString)
         {
-            this.mainWindow = mainWindow;
+            this.mainCanvas = mainCanvas;
 
             Node.ClearID();
             adjacencyMatrix = ConvertToMatrix(adjacencyMatrixString);
@@ -106,12 +105,9 @@ namespace Graph
         /// </summary>
         public void DrawGraph()
         {
-            mainWindow.MainCanvas.Children.Clear();
+            mainCanvas.Children.Clear();
             DrawEdges();
             DrawNodes();
-
-            mainWindow.sequentialProggresBar.Value = 0;
-            mainWindow.EdgesCount.Content = Edges.Count;
         }
 
         /// <summary>
@@ -149,7 +145,7 @@ namespace Graph
         {
             for (int i = 0; i < count; i++)
             {
-                Node newNode = new Node(globalRandom, mainWindow);
+                Node newNode = new Node(globalRandom, mainCanvas);
                 Nodes.Add(newNode);
             }
         }
@@ -216,7 +212,7 @@ namespace Graph
         /// <summary>
         /// Method for drawing <see cref="Node"/> on <see cref="Canvas"/>.
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node">Specyfic <see cref="Node"/> which will be drawn on <see cref="Canvas"/>.</param>
         private void DrawSingleNode(Node node)
         {
             Vector2 position = node.Position;
@@ -247,15 +243,15 @@ namespace Graph
             Canvas.SetZIndex(nodeID, 6);
 
 
-            mainWindow.MainCanvas.Children.Add(drawedNode);
-            mainWindow.MainCanvas.Children.Add(nodeID);
+            mainCanvas.Children.Add(drawedNode);
+            mainCanvas.Children.Add(nodeID);
         }
 
         /// <summary>
         /// Method for drawing highlighted <see cref="Node"/> on <see cref="Canvas"/>.
         /// <see cref="HighlightNodeAndEdges(Point)"/>
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node">Specyfic <see cref="Node"/> which will be highlighted on <see cref="Canvas"/>.</param>
         private void DrawHighlightedNode(Node node)
         {
             Vector2 position = node.Position;
@@ -272,13 +268,13 @@ namespace Graph
 
             Canvas.SetZIndex(drawedNode, 4);
 
-            mainWindow.MainCanvas.Children.Add(drawedNode);
+            mainCanvas.Children.Add(drawedNode);
         }
 
         /// <summary>
         /// Method for drawing <see cref="Edge"/> on <see cref="Canvas"/>.
         /// </summary>
-        /// <param name="edge"></param>
+        /// <param name="edge"><see cref="Edge"/> which represents connection between two <see cref="Node"/>s.</param>
         private void DrawSingleEdge(Edge edge)
         {
             Vector2 position1 = edge.Nodes.Item1.Position;
@@ -296,14 +292,14 @@ namespace Graph
 
             Canvas.SetZIndex(drawedEdge, 1);
 
-            mainWindow.MainCanvas.Children.Add(drawedEdge);
+            mainCanvas.Children.Add(drawedEdge);
         }
 
         /// <summary>
-        /// Method for drawing highlighted <see cref="Edge"/> on <see cref="Canvas"/>.
+        /// Method for drawing highlighted <see cref="Edge"/> on <see cref="System.Windows.Controls.Canvas"/>.
         /// <see cref="HighlightNodeAndEdges(Point)"/>
         /// </summary>
-        /// <param name="edge"></param>
+        /// <param name="edge"><see cref="Edge"/> which is connected to highlighted <see cref="Node"/>.</param>
         private void DrawHighlightedEdge(Edge edge)
         {
             Vector2 position1 = edge.Nodes.Item1.Position;
@@ -321,7 +317,7 @@ namespace Graph
 
             Canvas.SetZIndex(drawedEdge, 2);
 
-            mainWindow.MainCanvas.Children.Add(drawedEdge);
+            mainCanvas.Children.Add(drawedEdge);
         }
 
         /// <summary>
@@ -433,7 +429,7 @@ namespace Graph
 
                 Canvas.SetZIndex(doggie, 10);
 
-                mainWindow.MainCanvas.Children.Add(doggie);
+                mainCanvas.Children.Add(doggie);
             }
         }
     }
@@ -469,13 +465,13 @@ namespace Graph
         /// Constructor which initiate new <see cref="Node"/> with random position 
         /// in between <see cref="Canvas"/> boundaries.
         /// </summary>
-        /// <param name="globalRandom"></param>
-        /// <param name="mainWindow"></param>
-        public Node(System.Random globalRandom, MainWindow mainWindow)
+        /// <param name="globalRandom">Global random object</param>
+        /// <param name="mainCanvas">Canvas on which graph will be drawn.</param>
+        public Node(System.Random globalRandom, Canvas mainCanvas)
         {
             ID = globalID++;
-            double shrinkedCanvasWidth = mainWindow.MainCanvas.ActualWidth - 20;
-            double shrinkedCanvasHeight = mainWindow.MainCanvas.ActualHeight - 20;
+            double shrinkedCanvasWidth = mainCanvas.ActualWidth - 20;
+            double shrinkedCanvasHeight = mainCanvas.ActualHeight - 20;
 
             Position.X = globalRandom.NextFloatRange(0, (float)shrinkedCanvasWidth);
             Position.Y = globalRandom.NextFloatRange(0, (float)shrinkedCanvasHeight);
@@ -503,8 +499,8 @@ namespace Graph
         /// <summary>
         /// Constructor which creates tuplce containing corresponding <see cref="Node"/>s.
         /// </summary>
-        /// <param name="firstNode"></param>
-        /// <param name="secondNode"></param>
+        /// <param name="firstNode">First <see cref="Node"/> of connection.</param>
+        /// <param name="secondNode">Second <see cref="Node"/> of connection.</param>
         public Edge(Node firstNode, Node secondNode)
         {
             Nodes = new Tuple<Node, Node>(firstNode, secondNode);

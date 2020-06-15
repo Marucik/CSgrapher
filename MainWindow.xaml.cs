@@ -16,8 +16,6 @@ namespace CSgrapher
         private double zoomValue = 1;
         private static System.Windows.Threading.DispatcherTimer timer;
         private int sequentialCounter = 0;
-        private static MainWindow appWindow;
-
 
         /// <summary>
         /// MainWindow.xaml constructor. 
@@ -28,16 +26,12 @@ namespace CSgrapher
         {
             InitializeComponent();
 
-            appWindow = this;
-
             ZoomLabel.Content = $"{(int)(zoomValue * 100)}%";
         }
 
         /// <summary>
         /// Method for handling zooming canvas.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ScrollViewer_Zoom_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
@@ -62,8 +56,6 @@ namespace CSgrapher
         /// <summary>
         /// Method for handling execution of dispatched arrangement alghoritm.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_Arrange_Click(object sender, RoutedEventArgs e)
         {
             sequentialCounter = 0;
@@ -79,20 +71,18 @@ namespace CSgrapher
         /// Method for dispatcher <see cref="EventHandler"/> which executes
         /// force calculator for given <see cref="graph"/>.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Sequentia_Arrange_Tick(object sender, EventArgs e)
         {
             sequentialCounter++;
 
-            ForceCalculator.ForceCalculator forceCalculator = new ForceCalculator.ForceCalculator(appWindow);
+            ForceCalculator.ForceCalculator forceCalculator = new ForceCalculator.ForceCalculator(MainCanvas);
             forceCalculator.CalculateForces(graph);
 
             graph.DrawGraph();
+            ResetStats();
 
             sequentialProggresBar.Value = sequentialCounter;
 
-            CommandManager.InvalidateRequerySuggested();
             if (sequentialCounter >= 120)
             {
                 timer.Stop();
@@ -103,8 +93,6 @@ namespace CSgrapher
         /// Method for creating new random <see cref="graph"/> instance with
         /// given number of nodes in <see cref="NodeCount"/> window.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_NewRandom_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
@@ -114,8 +102,9 @@ namespace CSgrapher
             {
                 sequentialCounter = 0;
                 nodeCount = Int32.Parse(nodeCountPopUp.Answer);
-                graph = new Graph.Graph(appWindow, nodeCount);
+                graph = new Graph.Graph(MainCanvas, nodeCount);
                 graph.DrawGraph();
+                ResetStats();
                 EnableMenu();
             }
 
@@ -127,8 +116,6 @@ namespace CSgrapher
         /// given number of <see cref="Graph.Node"/> in <see cref="NodeCount"/> window
         /// and user-added <see cref="Graph.Edge"/>s.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_New_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
@@ -140,8 +127,9 @@ namespace CSgrapher
 
                 if (matrixCreator.ShowDialog() == true)
                 {
-                    graph = new Graph.Graph(appWindow, matrixCreator.AdjecencyMatrix);
+                    graph = new Graph.Graph(MainCanvas, matrixCreator.AdjecencyMatrix);
                     graph.DrawGraph();
+                    ResetStats();
                     EnableMenu();
                 }
             }
@@ -152,8 +140,6 @@ namespace CSgrapher
         /// <summary>
         /// Method handling graph to file saving.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_Save_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -173,8 +159,6 @@ namespace CSgrapher
         /// <summary>
         /// Method handling opening graph from file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_Open_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -186,8 +170,10 @@ namespace CSgrapher
             if (openFileDialog.ShowDialog() == true)
             {
                 string adjacencyMatrixString = File.ReadAllText(openFileDialog.FileName);
-                graph = new Graph.Graph(appWindow, adjacencyMatrixString);
+                graph = new Graph.Graph(MainCanvas, adjacencyMatrixString);
                 graph.DrawGraph();
+
+                ResetStats();
             }
 
             e.Handled = true;
@@ -196,8 +182,6 @@ namespace CSgrapher
         /// <summary>
         /// Method which converts <see cref="Graph.Node"/>
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_DogUp_Click(object sender, RoutedEventArgs e)
         {
             graph.ConvertToDogs();
@@ -209,8 +193,6 @@ namespace CSgrapher
         /// Method handling highlighting <see cref="Graph.Node"/> and corresponding
         /// <see cref="Graph.Edge"/> on <see cref="MainCanvas"/>
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainCanvas_MouseUp_HighlighNode(object sender, MouseButtonEventArgs e)
         {
             if (graph != null && graph.NodesCount > 0)
@@ -231,6 +213,12 @@ namespace CSgrapher
             MenuDogUp.IsEnabled = true;
             MenuSave.IsEnabled = true;
             MenuTideUp.IsEnabled = true;
+        }
+
+        private void ResetStats()
+        {
+            sequentialProggresBar.Value = 0;
+            EdgesCount.Content = graph.Edges.Count;
         }
     }
 }
