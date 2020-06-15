@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['drawgraph_38',['DrawGraph',['../class_graph_1_1_graph.html#a2090a16a0cd7a8a03c7a440bf798239a',1,'Graph::Graph']]]
+  ['buttondialogok_5fclick_92',['ButtonDialogOk_Click',['../class_c_sgrapher_1_1_matrix_creator.html#a356d888def299660b6bc047b38f72b4e',1,'CSgrapher.MatrixCreator.ButtonDialogOk_Click()'],['../class_c_sgrapher_1_1_node_count.html#acb48ea6ba5f8b4a3d4324194cf20b2da',1,'CSgrapher.NodeCount.ButtonDialogOk_Click()']]]
 ];

@@ -83,6 +83,8 @@ $(document).ready(function(){initNavTree('class_force_calculator_1_1_force_calcu
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_force_calculator_1_1_force_calculator-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ForceCalculator.ForceCalculator Class Reference</div>  </div>
@@ -94,12 +96,39 @@ $(document).ready(function(){initNavTree('class_force_calculator_1_1_force_calcu
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8676e070b7d441d75bc4576372af927b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a8676e070b7d441d75bc4576372af927b">ForceCalculator</a> (Canvas mainCanvas)</td></tr>
+<tr class="memitem:a8676e070b7d441d75bc4576372af927b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a8676e070b7d441d75bc4576372af927b">ForceCalculator</a> (Canvas <a class="el" href="class_force_calculator_1_1_force_calculator.html#aa361a2fb635a96b0eae25f8a5745e764">mainCanvas</a>)</td></tr>
 <tr class="memdesc:a8676e070b7d441d75bc4576372af927b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concstructor which targets current Canvas.  <a href="class_force_calculator_1_1_force_calculator.html#a8676e070b7d441d75bc4576372af927b">More...</a><br /></td></tr>
 <tr class="separator:a8676e070b7d441d75bc4576372af927b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29bb99c48181872a1393b6d9d426aca5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a29bb99c48181872a1393b6d9d426aca5">CalculateForces</a> (<a class="el" href="class_graph_1_1_graph.html">Graph.Graph</a> graph)</td></tr>
+<tr class="memitem:a29bb99c48181872a1393b6d9d426aca5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a29bb99c48181872a1393b6d9d426aca5">CalculateForces</a> (<a class="el" href="class_graph_1_1_graph.html">Graph.Graph</a> <a class="el" href="class_force_calculator_1_1_force_calculator.html#af996949b1b56cc4757b993aa48ff60c9">graph</a>)</td></tr>
 <tr class="memdesc:a29bb99c48181872a1393b6d9d426aca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for calculating forces applied to passed <a class="el" href="namespace_graph.html">Graph</a>. Method iterates 10 times for faster results.  <a href="class_force_calculator_1_1_force_calculator.html#a29bb99c48181872a1393b6d9d426aca5">More...</a><br /></td></tr>
 <tr class="separator:a29bb99c48181872a1393b6d9d426aca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a213662c2786a448dc1d3a2072498d929"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a213662c2786a448dc1d3a2072498d929">AttractiveRatio</a> (float distance)</td></tr>
+<tr class="memdesc:a213662c2786a448dc1d3a2072498d929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for calculating ratio applied to <a class="el" href="class_force_calculator_1_1_force_calculator.html#a838b2882b7c08a19a978987a4f4c53da" title="Method which calculates new displacement based on attractive forces between connected Nodes.">AttractiveDisplacement</a> displacement values.  <a href="class_force_calculator_1_1_force_calculator.html#a213662c2786a448dc1d3a2072498d929">More...</a><br /></td></tr>
+<tr class="separator:a213662c2786a448dc1d3a2072498d929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838b2882b7c08a19a978987a4f4c53da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a838b2882b7c08a19a978987a4f4c53da">AttractiveDisplacement</a> (<a class="el" href="class_graph_1_1_edge.html">Edge</a> edge)</td></tr>
+<tr class="memdesc:a838b2882b7c08a19a978987a4f4c53da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which calculates new displacement based on attractive forces between connected Nodes.  <a href="class_force_calculator_1_1_force_calculator.html#a838b2882b7c08a19a978987a4f4c53da">More...</a><br /></td></tr>
+<tr class="separator:a838b2882b7c08a19a978987a4f4c53da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae51f901d91b65dc8588dda3a5f40b01c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#ae51f901d91b65dc8588dda3a5f40b01c">RepulsiveRatio</a> (float distance)</td></tr>
+<tr class="memdesc:ae51f901d91b65dc8588dda3a5f40b01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for calculating ratio applied to <a class="el" href="class_force_calculator_1_1_force_calculator.html#a6a4b75adfefaf18c52d00b39e68145d3" title="Method which calcluates new bisplacement based on repulsive forces between every Node in current Grap...">RepulsiveDisplacement</a> displacement values.  <a href="class_force_calculator_1_1_force_calculator.html#ae51f901d91b65dc8588dda3a5f40b01c">More...</a><br /></td></tr>
+<tr class="separator:ae51f901d91b65dc8588dda3a5f40b01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a4b75adfefaf18c52d00b39e68145d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a6a4b75adfefaf18c52d00b39e68145d3">RepulsiveDisplacement</a> (<a class="el" href="class_graph_1_1_node.html">Node</a> node)</td></tr>
+<tr class="memdesc:a6a4b75adfefaf18c52d00b39e68145d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which calcluates new bisplacement based on repulsive forces between every Node in current <a class="el" href="namespace_graph.html">Graph</a>.  <a href="class_force_calculator_1_1_force_calculator.html#a6a4b75adfefaf18c52d00b39e68145d3">More...</a><br /></td></tr>
+<tr class="separator:a6a4b75adfefaf18c52d00b39e68145d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d08b0d6f9068ac806ed5aa94c494f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#ac5d08b0d6f9068ac806ed5aa94c494f0">DisplaceNode</a> (<a class="el" href="class_graph_1_1_node.html">Node</a> node)</td></tr>
+<tr class="memdesc:ac5d08b0d6f9068ac806ed5aa94c494f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which displace Node with new calculated position.  <a href="class_force_calculator_1_1_force_calculator.html#ac5d08b0d6f9068ac806ed5aa94c494f0">More...</a><br /></td></tr>
+<tr class="separator:ac5d08b0d6f9068ac806ed5aa94c494f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a1b202f5d5ea4566016752da09b91d215"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#a1b202f5d5ea4566016752da09b91d215">factor</a></td></tr>
+<tr class="separator:a1b202f5d5ea4566016752da09b91d215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa361a2fb635a96b0eae25f8a5745e764"><td class="memItemLeft" align="right" valign="top">readonly Canvas&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#aa361a2fb635a96b0eae25f8a5745e764">mainCanvas</a></td></tr>
+<tr class="separator:aa361a2fb635a96b0eae25f8a5745e764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af996949b1b56cc4757b993aa48ff60c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graph_1_1_graph.html">Graph.Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_force_calculator_1_1_force_calculator.html#af996949b1b56cc4757b993aa48ff60c9">graph</a></td></tr>
+<tr class="separator:af996949b1b56cc4757b993aa48ff60c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class responsible for calculating forces applied to graph nodes. It also contains method for rearranging nodes on corresponding Canvas <a class="el" href="class_force_calculator_1_1_force_calculator.html#a29bb99c48181872a1393b6d9d426aca5" title="Method for calculating forces applied to passed Graph. Method iterates 10 times for faster results.">CalculateForces</a> method ivokes only one "tick" of arrangement alghoritm, so you should use it in loop or timer multiple times (more than 100 recommneded). </p>
@@ -131,6 +160,75 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a838b2882b7c08a19a978987a4f4c53da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a838b2882b7c08a19a978987a4f4c53da">&#9670;&nbsp;</a></span>AttractiveDisplacement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ForceCalculator.ForceCalculator.AttractiveDisplacement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_graph_1_1_edge.html">Edge</a>&#160;</td>
+          <td class="paramname"><em>edge</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method which calculates new displacement based on attractive forces between connected Nodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">edge</td><td>Connection between two Nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a213662c2786a448dc1d3a2072498d929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a213662c2786a448dc1d3a2072498d929">&#9670;&nbsp;</a></span>AttractiveRatio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ForceCalculator.ForceCalculator.AttractiveRatio </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method for calculating ratio applied to <a class="el" href="class_force_calculator_1_1_force_calculator.html#a838b2882b7c08a19a978987a4f4c53da" title="Method which calculates new displacement based on attractive forces between connected Nodes.">AttractiveDisplacement</a> displacement values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>Distance between nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Float ratio</dd></dl>
+
+</div>
+</div>
 <a id="a29bb99c48181872a1393b6d9d426aca5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a29bb99c48181872a1393b6d9d426aca5">&#9670;&nbsp;</a></span>CalculateForces()</h2>
 
@@ -157,8 +255,178 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac5d08b0d6f9068ac806ed5aa94c494f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5d08b0d6f9068ac806ed5aa94c494f0">&#9670;&nbsp;</a></span>DisplaceNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ForceCalculator.ForceCalculator.DisplaceNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_graph_1_1_node.html">Node</a>&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method which displace Node with new calculated position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Node to be displaced.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6a4b75adfefaf18c52d00b39e68145d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a4b75adfefaf18c52d00b39e68145d3">&#9670;&nbsp;</a></span>RepulsiveDisplacement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ForceCalculator.ForceCalculator.RepulsiveDisplacement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_graph_1_1_node.html">Node</a>&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method which calcluates new bisplacement based on repulsive forces between every Node in current <a class="el" href="namespace_graph.html">Graph</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Node whoch repulse other Nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae51f901d91b65dc8588dda3a5f40b01c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae51f901d91b65dc8588dda3a5f40b01c">&#9670;&nbsp;</a></span>RepulsiveRatio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ForceCalculator.ForceCalculator.RepulsiveRatio </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method for calculating ratio applied to <a class="el" href="class_force_calculator_1_1_force_calculator.html#a6a4b75adfefaf18c52d00b39e68145d3" title="Method which calcluates new bisplacement based on repulsive forces between every Node in current Grap...">RepulsiveDisplacement</a> displacement values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>Distance between nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Float ratio</dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1b202f5d5ea4566016752da09b91d215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b202f5d5ea4566016752da09b91d215">&#9670;&nbsp;</a></span>factor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ForceCalculator.ForceCalculator.factor</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af996949b1b56cc4757b993aa48ff60c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af996949b1b56cc4757b993aa48ff60c9">&#9670;&nbsp;</a></span>graph</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_graph_1_1_graph.html">Graph.Graph</a> ForceCalculator.ForceCalculator.graph</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa361a2fb635a96b0eae25f8a5745e764"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa361a2fb635a96b0eae25f8a5745e764">&#9670;&nbsp;</a></span>mainCanvas</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly Canvas ForceCalculator.ForceCalculator.mainCanvas</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/github/workspace/ForceCalculator.cs</li>
+<li>/github/workspace/<a class="el" href="_force_calculator_8cs.html">ForceCalculator.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

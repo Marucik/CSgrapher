@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['calculateforces_4',['CalculateForces',['../class_force_calculator_1_1_force_calculator.html#a29bb99c48181872a1393b6d9d426aca5',1,'ForceCalculator::ForceCalculator']]],
-  ['clearid_5',['ClearID',['../class_graph_1_1_node.html#aabdc51f8a6718649bdd9026c65c7623b',1,'Graph::Node']]],
-  ['connections_6',['Connections',['../class_graph_1_1_node.html#a91765d8b3f018ae4acf90158809e69b6',1,'Graph::Node']]],
-  ['converttodogs_7',['ConvertToDogs',['../class_graph_1_1_graph.html#af5f328ecf69c981a8dd4bcbd01fb45c3',1,'Graph::Graph']]],
-  ['csgrapher_8',['CSgrapher',['../namespace_c_sgrapher.html',1,'']]]
+  ['buttondialogok_5fclick_9',['ButtonDialogOk_Click',['../class_c_sgrapher_1_1_matrix_creator.html#a356d888def299660b6bc047b38f72b4e',1,'CSgrapher.MatrixCreator.ButtonDialogOk_Click()'],['../class_c_sgrapher_1_1_node_count.html#acb48ea6ba5f8b4a3d4324194cf20b2da',1,'CSgrapher.NodeCount.ButtonDialogOk_Click()']]]
 ];

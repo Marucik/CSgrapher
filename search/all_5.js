@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['graph_14',['Graph',['../class_graph_1_1_graph.html',1,'Graph.Graph'],['../namespace_graph.html',1,'Graph'],['../class_graph_1_1_graph.html#ab6a8330704fc1821e1f1e0a7e60aab9b',1,'Graph.Graph.Graph(Canvas mainCanvas, int nodesCount)'],['../class_graph_1_1_graph.html#a45531fe03eb2c827ac1f077ded9ab3f0',1,'Graph.Graph.Graph(Canvas mainCanvas, List&lt; List&lt; int &gt;&gt; adjacencyMatrix)'],['../class_graph_1_1_graph.html#a5f712c11b3567a5097f0113f3fc4e88c',1,'Graph.Graph.Graph(Canvas mainCanvas, string adjacencyMatrixString)']]]
+  ['factor_32',['factor',['../class_force_calculator_1_1_force_calculator.html#a1b202f5d5ea4566016752da09b91d215',1,'ForceCalculator::ForceCalculator']]],
+  ['forcecalculator_33',['ForceCalculator',['../class_force_calculator_1_1_force_calculator.html',1,'ForceCalculator.ForceCalculator'],['../namespace_force_calculator.html',1,'ForceCalculator'],['../class_force_calculator_1_1_force_calculator.html#a8676e070b7d441d75bc4576372af927b',1,'ForceCalculator.ForceCalculator.ForceCalculator()']]],
+  ['forcecalculator_2ecs_34',['ForceCalculator.cs',['../_force_calculator_8cs.html',1,'']]]
 ];

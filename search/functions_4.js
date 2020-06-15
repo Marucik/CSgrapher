@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['graph_41',['Graph',['../class_graph_1_1_graph.html#ab6a8330704fc1821e1f1e0a7e60aab9b',1,'Graph.Graph.Graph(Canvas mainCanvas, int nodesCount)'],['../class_graph_1_1_graph.html#a45531fe03eb2c827ac1f077ded9ab3f0',1,'Graph.Graph.Graph(Canvas mainCanvas, List&lt; List&lt; int &gt;&gt; adjacencyMatrix)'],['../class_graph_1_1_graph.html#a5f712c11b3567a5097f0113f3fc4e88c',1,'Graph.Graph.Graph(Canvas mainCanvas, string adjacencyMatrixString)']]]
+  ['edge_109',['Edge',['../class_graph_1_1_edge.html#a226ecc9d74fc589701ec3598d498f4a8',1,'Graph::Edge']]],
+  ['enablemenu_110',['EnableMenu',['../class_c_sgrapher_1_1_main_window.html#abf1edb12283b98366d64a8c7a51f3677',1,'CSgrapher::MainWindow']]]
 ];
