@@ -1,4 +1,4 @@
-﻿using CSgrapher;
+﻿//using CSgrapher;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -23,13 +23,12 @@ namespace ForceCalculator
         private Graph.Graph graph;
 
         /// <summary>
-        /// Concstructor which targets current <see cref="MainWindow"/> and passes <see cref="Canvas"/>
-        /// from it to <see cref="mainCanvas"/> field.
+        /// Concstructor which targets current <see cref="Canvas"/>.
         /// </summary>
-        /// <param name="mainWindow"></param>
-        public ForceCalculator(MainWindow mainWindow)
+        /// <param name="mainCanvas"></param>
+        public ForceCalculator(Canvas mainCanvas)
         {
-            mainCanvas = mainWindow.MainCanvas;
+            this.mainCanvas = mainCanvas;
         }
         
         /// <summary>

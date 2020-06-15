@@ -16,8 +16,6 @@ namespace CSgrapher
         private double zoomValue = 1;
         private static System.Windows.Threading.DispatcherTimer timer;
         private int sequentialCounter = 0;
-        private static MainWindow appWindow;
-
 
         /// <summary>
         /// MainWindow.xaml constructor. 
@@ -27,8 +25,6 @@ namespace CSgrapher
         public MainWindow()
         {
             InitializeComponent();
-
-            appWindow = this;
 
             ZoomLabel.Content = $"{(int)(zoomValue * 100)}%";
         }
@@ -85,10 +81,11 @@ namespace CSgrapher
         {
             sequentialCounter++;
 
-            ForceCalculator.ForceCalculator forceCalculator = new ForceCalculator.ForceCalculator(appWindow);
+            ForceCalculator.ForceCalculator forceCalculator = new ForceCalculator.ForceCalculator(MainCanvas);
             forceCalculator.CalculateForces(graph);
 
             graph.DrawGraph();
+            ResetStats();
 
             sequentialProggresBar.Value = sequentialCounter;
 
@@ -113,8 +110,9 @@ namespace CSgrapher
             {
                 sequentialCounter = 0;
                 nodeCount = Int32.Parse(nodeCountPopUp.Answer);
-                graph = new Graph.Graph(appWindow, nodeCount);
+                graph = new Graph.Graph(MainCanvas, nodeCount);
                 graph.DrawGraph();
+                ResetStats();
                 EnableMenu();
             }
 
@@ -139,8 +137,9 @@ namespace CSgrapher
 
                 if (matrixCreator.ShowDialog() == true)
                 {
-                    graph = new Graph.Graph(appWindow, matrixCreator.AdjecencyMatrix);
+                    graph = new Graph.Graph(MainCanvas, matrixCreator.AdjecencyMatrix);
                     graph.DrawGraph();
+                    ResetStats();
                     EnableMenu();
                 }
             }
@@ -185,8 +184,10 @@ namespace CSgrapher
             if (openFileDialog.ShowDialog() == true)
             {
                 string adjacencyMatrixString = File.ReadAllText(openFileDialog.FileName);
-                graph = new Graph.Graph(appWindow, adjacencyMatrixString);
+                graph = new Graph.Graph(MainCanvas, adjacencyMatrixString);
                 graph.DrawGraph();
+
+                ResetStats();
             }
 
             e.Handled = true;
@@ -230,6 +231,12 @@ namespace CSgrapher
             MenuDogUp.IsEnabled = true;
             MenuSave.IsEnabled = true;
             MenuTideUp.IsEnabled = true;
+        }
+
+        private void ResetStats()
+        {
+            sequentialProggresBar.Value = 0;
+            EdgesCount.Content = graph.Edges.Count;
         }
     }
 }
