@@ -25,7 +25,7 @@ namespace ForceCalculator
         /// <summary>
         /// Concstructor which targets current <see cref="Canvas"/>.
         /// </summary>
-        /// <param name="mainCanvas"></param>
+        /// <param name="mainCanvas">Canvas on which graph will be drawn.</param>
         public ForceCalculator(Canvas mainCanvas)
         {
             this.mainCanvas = mainCanvas;
@@ -35,7 +35,7 @@ namespace ForceCalculator
         /// Method for calculating forces applied to passed <see cref="Graph"/>.
         /// Method iterates 10 times for faster results.
         /// </summary>
-        /// <param name="graph"></param>
+        /// <param name="graph">Object on which all calculations are based.</param>
         public void CalculateForces(Graph.Graph graph)
         {
             this.graph = graph;
@@ -66,7 +66,7 @@ namespace ForceCalculator
         /// <summary>
         /// Method for calculating ratio applied to <see cref="AttractiveDisplacement"/> displacement values.
         /// </summary>
-        /// <param name="distance"></param>
+        /// <param name="distance">Distance between nodes.</param>
         /// <returns>Float ratio</returns>
         private float AttractiveRatio(float distance)
         {
@@ -80,7 +80,7 @@ namespace ForceCalculator
         /// <summary>
         /// Method which calculates new displacement based on attractive forces between connected <see cref="Node"/>s.
         /// </summary>
-        /// <param name="edge"></param>
+        /// <param name="edge">Connection between two <see cref="Node"/>s.</param>
         private void AttractiveDisplacement(Edge edge)
         {
             Node firstNode = edge.Nodes.Item1;
@@ -98,7 +98,7 @@ namespace ForceCalculator
         /// <summary>
         /// Method for calculating ratio applied to <see cref="RepulsiveDisplacement"/> displacement values.
         /// </summary>
-        /// <param name="distance"></param>
+        /// <param name="distance">Distance between nodes.</param>
         /// <returns>Float ratio</returns>
         private float RepulsiveRatio(float distance)
         {
@@ -112,7 +112,7 @@ namespace ForceCalculator
         /// <summary>
         /// Method which calcluates new bisplacement based on repulsive forces between every <see cref="Node"/> in current <see cref="Graph"/>.
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node"><see cref="Node"/> whoch repulse other <see cref="Node"/>s.</param>
         private void RepulsiveDisplacement(Node node)
         {
             node.Displacement = new Vector2(0);
@@ -136,7 +136,7 @@ namespace ForceCalculator
         /// <summary>
         /// Method which displace <see cref="Node"/> with new calculated position.
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node">Node to be displaced.</param>
         private void DisplaceNode(Node node)
         {
             Vector2 distanceVector = Vector2.Divide(node.Displacement, Vector2.Abs(node.Displacement));

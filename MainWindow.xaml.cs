@@ -32,8 +32,6 @@ namespace CSgrapher
         /// <summary>
         /// Method for handling zooming canvas.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ScrollViewer_Zoom_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
@@ -58,8 +56,6 @@ namespace CSgrapher
         /// <summary>
         /// Method for handling execution of dispatched arrangement alghoritm.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_Arrange_Click(object sender, RoutedEventArgs e)
         {
             sequentialCounter = 0;
@@ -75,8 +71,6 @@ namespace CSgrapher
         /// Method for dispatcher <see cref="EventHandler"/> which executes
         /// force calculator for given <see cref="graph"/>.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Sequentia_Arrange_Tick(object sender, EventArgs e)
         {
             sequentialCounter++;
@@ -99,8 +93,6 @@ namespace CSgrapher
         /// Method for creating new random <see cref="graph"/> instance with
         /// given number of nodes in <see cref="NodeCount"/> window.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_NewRandom_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
@@ -124,8 +116,6 @@ namespace CSgrapher
         /// given number of <see cref="Graph.Node"/> in <see cref="NodeCount"/> window
         /// and user-added <see cref="Graph.Edge"/>s.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_New_Click(object sender, RoutedEventArgs e)
         {
             NodeCount nodeCountPopUp = new NodeCount();
@@ -150,8 +140,6 @@ namespace CSgrapher
         /// <summary>
         /// Method handling graph to file saving.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_Save_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -171,8 +159,6 @@ namespace CSgrapher
         /// <summary>
         /// Method handling opening graph from file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_Open_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -196,8 +182,6 @@ namespace CSgrapher
         /// <summary>
         /// Method which converts <see cref="Graph.Node"/>
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Menu_DogUp_Click(object sender, RoutedEventArgs e)
         {
             graph.ConvertToDogs();
@@ -209,8 +193,6 @@ namespace CSgrapher
         /// Method handling highlighting <see cref="Graph.Node"/> and corresponding
         /// <see cref="Graph.Edge"/> on <see cref="MainCanvas"/>
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainCanvas_MouseUp_HighlighNode(object sender, MouseButtonEventArgs e)
         {
             if (graph != null && graph.NodesCount > 0)
