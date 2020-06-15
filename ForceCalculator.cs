@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 using System.Windows.Controls;
 using Graph;
-using System.Windows;
-using System.Threading;
 
 namespace ForceCalculator
 {
