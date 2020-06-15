@@ -1,8 +1,8 @@
 var class_graph_1_1_graph =
 [
-    [ "Graph", "class_graph_1_1_graph.html#a7ba005d47b47649a02ae311dfe11a7d9", null ],
-    [ "Graph", "class_graph_1_1_graph.html#a1d2f94daca91f5ab9f2781adbd8623ee", null ],
-    [ "Graph", "class_graph_1_1_graph.html#abd96d2994116cf30606696c65aa0efa0", null ],
+    [ "Graph", "class_graph_1_1_graph.html#ab6a8330704fc1821e1f1e0a7e60aab9b", null ],
+    [ "Graph", "class_graph_1_1_graph.html#a45531fe03eb2c827ac1f077ded9ab3f0", null ],
+    [ "Graph", "class_graph_1_1_graph.html#a5f712c11b3567a5097f0113f3fc4e88c", null ],
     [ "ConvertToDogs", "class_graph_1_1_graph.html#af5f328ecf69c981a8dd4bcbd01fb45c3", null ],
     [ "DrawGraph", "class_graph_1_1_graph.html#a2090a16a0cd7a8a03c7a440bf798239a", null ],
     [ "HighlightNodeAndEdges", "class_graph_1_1_graph.html#af0ab2b82d1b4b58398073716073deac9", null ],

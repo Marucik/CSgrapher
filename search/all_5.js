@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['graph_14',['Graph',['../class_graph_1_1_graph.html',1,'Graph.Graph'],['../namespace_graph.html',1,'Graph'],['../class_graph_1_1_graph.html#a7ba005d47b47649a02ae311dfe11a7d9',1,'Graph.Graph.Graph(MainWindow mainWindow, int nodesCount)'],['../class_graph_1_1_graph.html#a1d2f94daca91f5ab9f2781adbd8623ee',1,'Graph.Graph.Graph(MainWindow mainWindow, List&lt; List&lt; int &gt;&gt; adjacencyMatrix)'],['../class_graph_1_1_graph.html#abd96d2994116cf30606696c65aa0efa0',1,'Graph.Graph.Graph(MainWindow mainWindow, string adjacencyMatrixString)']]]
+  ['graph_14',['Graph',['../class_graph_1_1_graph.html',1,'Graph.Graph'],['../namespace_graph.html',1,'Graph'],['../class_graph_1_1_graph.html#ab6a8330704fc1821e1f1e0a7e60aab9b',1,'Graph.Graph.Graph(Canvas mainCanvas, int nodesCount)'],['../class_graph_1_1_graph.html#a45531fe03eb2c827ac1f077ded9ab3f0',1,'Graph.Graph.Graph(Canvas mainCanvas, List&lt; List&lt; int &gt;&gt; adjacencyMatrix)'],['../class_graph_1_1_graph.html#a5f712c11b3567a5097f0113f3fc4e88c',1,'Graph.Graph.Graph(Canvas mainCanvas, string adjacencyMatrixString)']]]
 ];
